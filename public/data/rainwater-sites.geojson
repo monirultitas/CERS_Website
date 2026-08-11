@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "properties": { "note": "Illustrative sample data pending live monitoring feed" },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [90.362, 23.766] },
+      "properties": {
+        "name": "Mohammadpur pilot site",
+        "suitability": "High",
+        "note": "Active community pilot, monitoring wells installed"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [90.40, 23.73] },
+      "properties": {
+        "name": "New Market ward",
+        "suitability": "High",
+        "note": "Large institutional roof area identified"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [90.42, 23.81] },
+      "properties": {
+        "name": "Baridhara catchment",
+        "suitability": "Medium",
+        "note": "Moderate recharge potential, soil permeability limited"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [90.385, 23.79] },
+      "properties": {
+        "name": "Mirpur DOHS",
+        "suitability": "Medium",
+        "note": "Candidate for phase 2 pilot expansion"
+      }
+    }
+  ]
+}

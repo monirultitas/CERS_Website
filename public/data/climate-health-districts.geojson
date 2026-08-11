@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "properties": { "note": "Illustrative sample data pending live monitoring feed" },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[90.40, 23.70], [90.45, 23.70], [90.45, 23.735], [90.40, 23.735], [90.40, 23.70]]]
+      },
+      "properties": {
+        "name": "Old Dhaka",
+        "riskIndex": "Elevated",
+        "note": "Dense settlement, heat exposure & water access risk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[90.34, 23.75], [90.39, 23.75], [90.39, 23.785], [90.34, 23.785], [90.34, 23.75]]]
+      },
+      "properties": {
+        "name": "Mohammadpur–Adabor",
+        "riskIndex": "Moderate",
+        "note": "Mixed-density district, seasonal waterlogging risk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[90.40, 23.78], [90.44, 23.78], [90.44, 23.815], [90.40, 23.815], [90.40, 23.78]]]
+      },
+      "properties": {
+        "name": "Gulshan–Baridhara",
+        "riskIndex": "Lower",
+        "note": "Better drainage infrastructure, lower relative risk"
+      }
+    }
+  ]
+}

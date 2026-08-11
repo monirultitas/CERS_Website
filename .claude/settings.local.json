@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:cersbd.org)",
+      "WebSearch",
+      "PowerShell(node -v)",
+      "PowerShell(npm -v)",
+      "PowerShell(winget --version)",
+      "PowerShell(Test-Path \"C:\\\\Program Files\\\\nodejs\\\\node.exe\"; Test-Path \"$env:APPDATA\\\\npm\"; Test-Path \"$env:LOCALAPPDATA\\\\Programs\\\\nodejs\\\\node.exe\")"
+    ]
+  }
+}

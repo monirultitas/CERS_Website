@@ -1,0 +1,56 @@
+{
+  "type": "FeatureCollection",
+  "properties": { "note": "Illustrative sample data pending live monitoring feed" },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [90.4083, 23.755] },
+      "properties": {
+        "name": "Hatirjheel",
+        "wqi": 42,
+        "status": "Poor",
+        "note": "Elevated organic pollution, ongoing monitoring"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [90.3742, 23.7461] },
+      "properties": {
+        "name": "Dhanmondi Lake",
+        "wqi": 61,
+        "status": "Moderate",
+        "note": "Seasonal eutrophication signal in dry months"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [90.4078, 23.7925] },
+      "properties": {
+        "name": "Gulshan Lake",
+        "wqi": 58,
+        "status": "Moderate",
+        "note": "Improving trend since 2023 intervention"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [90.4074, 23.7104] },
+      "properties": {
+        "name": "Buriganga River (Sadarghat)",
+        "wqi": 21,
+        "status": "Poor",
+        "note": "Persistent industrial & sewage loading"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [90.4023, 23.8917] },
+      "properties": {
+        "name": "Turag River (Tongi)",
+        "wqi": 33,
+        "status": "Poor",
+        "note": "Upstream industrial effluent detected"
+      }
+    }
+  ]
+}

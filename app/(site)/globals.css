@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0b2530;
+
+  /* brand: deep teal-blue — satellites, water, GIS (core identity) */
+  --color-brand-50: #eef7fa;
+  --color-brand-100: #d7eef3;
+  --color-brand-200: #b0dde8;
+  --color-brand-300: #7ec5d6;
+  --color-brand-400: #49a9c0;
+  --color-brand-500: #2b8ca8;
+  --color-brand-600: #1e7290;
+  --color-brand-700: #185c76;
+  --color-brand-800: #164b60;
+  --color-brand-900: #143e50;
+  --color-brand-950: #0a222d;
+
+  /* moss: green — environment & chemistry, supporting context */
+  --color-moss-50: #f1f7ee;
+  --color-moss-100: #e1efda;
+  --color-moss-200: #c3dfb6;
+  --color-moss-300: #9fcb8c;
+  --color-moss-400: #79b364;
+  --color-moss-500: #5b9a48;
+  --color-moss-600: #457a38;
+  --color-moss-700: #37602e;
+  --color-moss-800: #2e4d27;
+  --color-moss-900: #274022;
+  --color-moss-950: #142312;
+
+  /* ink: near-black navy — dark sections, footer, text */
+  --color-ink-50: #eef2f4;
+  --color-ink-100: #d7e0e5;
+  --color-ink-200: #aec1c9;
+  --color-ink-300: #7f9dab;
+  --color-ink-400: #547686;
+  --color-ink-500: #3b5c6c;
+  --color-ink-600: #2c4756;
+  --color-ink-700: #223846;
+  --color-ink-800: #182833;
+  --color-ink-900: #101c24;
+  --color-ink-950: #071219;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-brand-50: var(--color-brand-50);
+  --color-brand-100: var(--color-brand-100);
+  --color-brand-200: var(--color-brand-200);
+  --color-brand-300: var(--color-brand-300);
+  --color-brand-400: var(--color-brand-400);
+  --color-brand-500: var(--color-brand-500);
+  --color-brand-600: var(--color-brand-600);
+  --color-brand-700: var(--color-brand-700);
+  --color-brand-800: var(--color-brand-800);
+  --color-brand-900: var(--color-brand-900);
+  --color-brand-950: var(--color-brand-950);
+
+  --color-moss-50: var(--color-moss-50);
+  --color-moss-100: var(--color-moss-100);
+  --color-moss-200: var(--color-moss-200);
+  --color-moss-300: var(--color-moss-300);
+  --color-moss-400: var(--color-moss-400);
+  --color-moss-500: var(--color-moss-500);
+  --color-moss-600: var(--color-moss-600);
+  --color-moss-700: var(--color-moss-700);
+  --color-moss-800: var(--color-moss-800);
+  --color-moss-900: var(--color-moss-900);
+  --color-moss-950: var(--color-moss-950);
+
+  --color-ink-50: var(--color-ink-50);
+  --color-ink-100: var(--color-ink-100);
+  --color-ink-200: var(--color-ink-200);
+  --color-ink-300: var(--color-ink-300);
+  --color-ink-400: var(--color-ink-400);
+  --color-ink-500: var(--color-ink-500);
+  --color-ink-600: var(--color-ink-600);
+  --color-ink-700: var(--color-ink-700);
+  --color-ink-800: var(--color-ink-800);
+  --color-ink-900: var(--color-ink-900);
+  --color-ink-950: var(--color-ink-950);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* subtle grid/scanline texture used behind hero & section headers to echo satellite/GIS motifs */
+.bg-geo-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-brand-300) 20%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-brand-300) 20%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+}

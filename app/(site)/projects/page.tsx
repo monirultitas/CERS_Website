@@ -1,0 +1,63 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import PageHero from "@/components/layout/PageHero";
+import Container from "@/components/layout/Container";
+import { projects } from "@/lib/projects-content";
+import { getResearchDetail } from "@/lib/research-content";
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description: "Active and completed CERS research projects across GIS, water, and climate & health.",
+};
+
+export default function ProjectsPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Projects"
+        title="Research in the field, mapped from orbit."
+        description="A working record of CERS's active and completed projects, each anchored to one of our four research pillars."
+      />
+
+      <section className="bg-white py-20">
+        <Container>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {projects.map((project) => {
+              const area = getResearchDetail(project.areaSlug);
+              return (
+                <Link
+                  key={project.slug}
+                  href={`/projects/${project.slug}`}
+                  className="group flex flex-col rounded-2xl border border-ink-100 p-7 transition-all hover:-translate-y-1 hover:border-brand-200 hover:shadow-lg"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
+                      {area?.name ?? project.areaSlug}
+                    </span>
+                    <span
+                      className={`text-xs font-semibold ${
+                        project.status === "Ongoing" ? "text-moss-600" : "text-ink-400"
+                      }`}
+                    >
+                      {project.status}
+                    </span>
+                  </div>
+                  <h2 className="font-display mt-4 text-xl font-semibold text-ink-900 group-hover:text-brand-700">
+                    {project.title}
+                  </h2>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-500">
+                    {project.summary}
+                  </p>
+                  <div className="mt-5 flex items-center justify-between text-xs text-ink-400">
+                    <span>{project.location}</span>
+                    <span>{project.timeframe}</span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+    </>
+  );
+}
