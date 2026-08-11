@@ -4,6 +4,7 @@ import Container from "@/components/layout/Container";
 import ContactForm from "@/components/contact/ContactForm";
 import LocationMap from "@/components/contact/LocationMap";
 import { siteConfig } from "@/lib/site-config";
+import { aboutImage } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -17,6 +18,9 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Let's talk about geospatial evidence for your work."
         description="Whether it's a partnership, a data request, or a question about our research, we'd like to hear from you."
+        image={aboutImage.src}
+        imageAlt={aboutImage.alt}
+        photoCredit={aboutImage.credit}
       />
 
       <section className="bg-white py-20">

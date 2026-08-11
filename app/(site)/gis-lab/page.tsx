@@ -3,6 +3,9 @@ import PageHero from "@/components/layout/PageHero";
 import Container from "@/components/layout/Container";
 import GeoQuiz from "@/components/gis-lab/GeoQuiz";
 import SpotTheLocationGame from "@/components/gis-lab/SpotTheLocationGame";
+import { areaImages } from "@/lib/media";
+
+const heroImage = areaImages["urban-water-quality"];
 
 export const metadata: Metadata = {
   title: "GIS Lab",
@@ -17,6 +20,9 @@ export default function GisLabPage() {
         eyebrow="Learn by playing"
         title="GIS Lab"
         description="Two quick games — one tests what you know about GIS and remote sensing, the other tests how well you know Dhaka's geography."
+        image={heroImage.src}
+        imageAlt={heroImage.alt}
+        photoCredit={heroImage.credit}
       />
 
       <section className="bg-white py-16">

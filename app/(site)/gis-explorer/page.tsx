@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import PageHero from "@/components/layout/PageHero";
 import Container from "@/components/layout/Container";
 import MapExplorer from "@/components/gis/MapExplorer";
+import { areaImages } from "@/lib/media";
+
+const heroImage = areaImages["geoai-remote-sensing"];
 
 export const metadata: Metadata = {
   title: "GIS Explorer",
@@ -16,6 +19,9 @@ export default function GisExplorerPage() {
         eyebrow="Interactive Map"
         title="GIS Explorer"
         description="Toggle layers to see how our four research pillars stack across the same city — water quality, flood risk, rainwater harvesting, and climate & health."
+        image={heroImage.src}
+        imageAlt={heroImage.alt}
+        photoCredit={heroImage.credit}
       />
 
       <section className="bg-white py-16">
