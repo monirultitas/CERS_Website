@@ -159,48 +159,50 @@ export default function MapExplorer() {
   }
 
   return (
-    <div className="relative flex h-[75vh] min-h-[520px] w-full flex-col overflow-hidden rounded-2xl border border-ink-100 lg:flex-row">
-      <div ref={containerRef} className="h-full w-full flex-1" />
-
-      {!ready && (
-        <div className="absolute inset-0 flex items-center justify-center bg-ink-50/80 lg:right-[280px]">
-          <span className="text-sm font-medium text-ink-400">Loading map layers…</span>
+    <div className="overflow-hidden rounded-2xl border border-ink-100">
+      <div className="border-b border-ink-100 bg-white p-5">
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-ink-500">
+            Layers
+          </h3>
+          <span className="text-xs text-ink-400">Illustrative sample data</span>
         </div>
-      )}
-
-      <aside className="flex w-full shrink-0 flex-col gap-1 border-t border-ink-100 bg-white p-5 lg:w-[280px] lg:border-l lg:border-t-0">
-        <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-ink-500">
-          Layers
-        </h3>
-        <p className="mt-1 text-xs text-ink-400">Illustrative sample data.</p>
-        <div className="mt-4 flex flex-col gap-3">
-          {gisLayers.map((layer) => (
-            <label
-              key={layer.id}
-              className="flex cursor-pointer items-start gap-3 rounded-lg p-2 hover:bg-ink-50"
-            >
-              <input
-                type="checkbox"
-                checked={activeLayers.has(layer.id)}
-                onChange={() => toggleLayer(layer.id)}
-                className="mt-1 h-4 w-4 shrink-0 rounded border-ink-300 accent-brand-700"
-              />
-              <span>
-                <span className="flex items-center gap-2 text-sm font-medium text-ink-900">
-                  <span
-                    className="h-2.5 w-2.5 shrink-0 rounded-full"
-                    style={{ backgroundColor: layer.color }}
-                  />
-                  {layer.name}
-                </span>
-                <span className="mt-0.5 block text-xs leading-snug text-ink-400">
-                  {layer.description}
-                </span>
-              </span>
-            </label>
-          ))}
+        <div className="mt-3 flex flex-wrap gap-2">
+          {gisLayers.map((layer) => {
+            const active = activeLayers.has(layer.id);
+            return (
+              <button
+                key={layer.id}
+                type="button"
+                onClick={() => toggleLayer(layer.id)}
+                aria-pressed={active}
+                title={layer.description}
+                className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+                  active
+                    ? "border-ink-200 bg-white text-ink-800"
+                    : "border-ink-100 bg-ink-50 text-ink-400"
+                }`}
+              >
+                <span
+                  className="h-2.5 w-2.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: active ? layer.color : "#c7d2d8" }}
+                />
+                {layer.name}
+              </button>
+            );
+          })}
         </div>
-      </aside>
+      </div>
+
+      <div className="relative h-[65vh] max-h-[640px] min-h-[420px] w-full">
+        <div ref={containerRef} className="h-full w-full" />
+
+        {!ready && (
+          <div className="absolute inset-0 flex items-center justify-center bg-ink-50/80">
+            <span className="text-sm font-medium text-ink-400">Loading map layers…</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
