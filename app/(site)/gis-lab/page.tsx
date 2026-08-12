@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/layout/PageHero";
 import Container from "@/components/layout/Container";
-import GeoQuiz from "@/components/gis-lab/GeoQuiz";
+import Quiz from "@/components/shared/Quiz";
 import SpotTheLocationGame from "@/components/gis-lab/SpotTheLocationGame";
 import { areaImages } from "@/lib/media";
+import { quizQuestions } from "@/lib/gis-lab-content";
 
 const heroImage = areaImages["urban-water-quality"];
 
@@ -45,7 +46,12 @@ export default function GisLabPage() {
               GeoAI.
             </p>
             <div className="mt-6 max-w-xl">
-              <GeoQuiz />
+              <Quiz
+                questions={quizQuestions}
+                perfectMessage="Perfect score — you think in pixels and polygons."
+                passMessage="Solid grasp of the fundamentals."
+                failMessage="A good start — the concepts sink in fast with practice."
+              />
             </div>
           </div>
         </Container>

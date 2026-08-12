@@ -1,16 +1,29 @@
 "use client";
 
 import { useState } from "react";
-import { quizQuestions } from "@/lib/gis-lab-content";
+import type { QuizQuestion } from "@/lib/gis-lab-content";
 
-export default function GeoQuiz() {
+export default function Quiz({
+  questions,
+  perfectMessage = "Perfect score!",
+  passMessage = "Solid result.",
+  failMessage = "A good start — try again to beat it.",
+}: {
+  questions: QuizQuestion[];
+  /** Shown when the player gets every question right. */
+  perfectMessage?: string;
+  /** Shown when the player scores at least half. */
+  passMessage?: string;
+  /** Shown when the player scores under half. */
+  failMessage?: string;
+}) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
 
-  const question = quizQuestions[index];
-  const isLast = index === quizQuestions.length - 1;
+  const question = questions[index];
+  const isLast = index === questions.length - 1;
 
   function selectAnswer(optionIndex: number) {
     if (selected !== null) return;
@@ -35,18 +48,19 @@ export default function GeoQuiz() {
   }
 
   if (finished) {
+    const message =
+      score === questions.length
+        ? perfectMessage
+        : score >= questions.length / 2
+        ? passMessage
+        : failMessage;
+
     return (
       <div className="rounded-2xl border border-ink-100 bg-white p-8 text-center">
         <p className="font-display text-4xl font-bold text-brand-700">
-          {score} / {quizQuestions.length}
+          {score} / {questions.length}
         </p>
-        <p className="mt-2 text-ink-600">
-          {score === quizQuestions.length
-            ? "Perfect score — you think in pixels and polygons."
-            : score >= quizQuestions.length / 2
-            ? "Solid grasp of the fundamentals."
-            : "A good start — the concepts sink in fast with practice."}
-        </p>
+        <p className="mt-2 text-ink-600">{message}</p>
         <button
           onClick={restart}
           className="mt-6 rounded-full bg-brand-700 px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-800"
@@ -61,7 +75,7 @@ export default function GeoQuiz() {
     <div className="rounded-2xl border border-ink-100 bg-white p-8">
       <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-ink-400">
         <span>
-          Question {index + 1} / {quizQuestions.length}
+          Question {index + 1} / {questions.length}
         </span>
         <span>Score: {score}</span>
       </div>

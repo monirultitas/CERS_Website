@@ -22,6 +22,7 @@ export const navItems: NavItem[] = [
   { label: "Projects", href: "/projects" },
   { label: "GIS Explorer", href: "/gis-explorer" },
   { label: "GIS Lab", href: "/gis-lab" },
+  { label: "Fun Facts", href: "/fun-facts" },
   { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ];
