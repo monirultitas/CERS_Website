@@ -9,7 +9,7 @@ export default function Footer() {
       <Container className="grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-1">
           <Logo variant="light" />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-300">
+          <p className="mt-4 max-w-xs text-justify text-sm leading-relaxed text-ink-300">
             {siteConfig.description}
           </p>
         </div>

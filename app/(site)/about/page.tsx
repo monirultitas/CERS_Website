@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     "CERS is a Dhaka-based nonprofit turning satellite imagery and geospatial analysis into evidence-based environmental policy for Bangladesh.",
 };
 
+// Re-check Sanity for new/updated team members every hour instead of only at build time.
+export const revalidate = 3600;
+
 export default function AboutPage() {
   return (
     <>

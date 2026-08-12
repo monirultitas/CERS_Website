@@ -3,7 +3,7 @@ export const siteConfig = {
   fullName: "Center for Environmental Research & Sustainability",
   tagline: "Geospatial Intelligence for Climate Resilience in Bangladesh",
   description:
-    "CERS is a Bangladesh-based nonprofit turning satellite data and geospatial analysis into evidence-based environmental policy — with applied environmental chemistry (water quality, pollution) as supporting context.",
+    "CERS is a Bangladesh-based nonprofit turning satellite data and geospatial analysis into evidence-based environmental policy with applied environmental chemistry (water quality, pollution) as supporting context.",
   url: "https://cersbd.org",
   email: "info@cersbd.org",
   phones: ["+880 1811-617885", "+880 1911-617885"],

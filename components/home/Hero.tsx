@@ -15,9 +15,9 @@ export default function Hero() {
         fill
         priority
         sizes="100vw"
-        className="object-cover opacity-40"
+        className="object-cover opacity-45"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/85 to-ink-950/50" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/80 to-ink-950/40" />
       <div className="bg-geo-grid absolute inset-0 opacity-10" />
 
       <Container className="relative grid grid-cols-1 items-center gap-10 py-16 lg:grid-cols-2 lg:py-20">
@@ -28,9 +28,9 @@ export default function Hero() {
           <h1 className="font-display mt-5 max-w-lg text-2xl font-bold leading-[1.2] text-white sm:text-3xl">
             {siteConfig.tagline}
           </h1>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-200 sm:text-base">
+          <p className="mt-4 max-w-md text-justify text-sm leading-relaxed text-ink-200 sm:text-base">
             {siteConfig.fullName} ({siteConfig.shortName}) turns satellite imagery and geospatial
-            analysis into evidence-based environmental policy — with applied environmental
+            analysis into evidence-based environmental policy with applied environmental
             chemistry, like water quality and pollution monitoring, as supporting context.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">

@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Container from "@/components/layout/Container";
-import { teamMembers } from "@/lib/placeholder-data";
+import { teamMembers as placeholderTeamMembers } from "@/lib/placeholder-data";
+import { sanityClient } from "@/lib/sanity/client";
+import { allTeamMembersQuery } from "@/lib/sanity/queries";
+import { urlForImage } from "@/lib/sanity/image";
+import { isSanityConfigured } from "@/sanity/env";
 
 function initials(name: string) {
   return name
@@ -21,7 +25,44 @@ const avatarTones = [
   "bg-moss-500",
 ];
 
-export default function TeamGrid() {
+type DisplayMember = {
+  slug: string;
+  name: string;
+  role: string;
+  bio?: string;
+  photo?: string;
+};
+
+type SanityTeamMember = {
+  name: string;
+  slug: string;
+  role: string;
+  bio?: string;
+  photo?: Parameters<typeof urlForImage>[0];
+};
+
+async function getTeamMembers(): Promise<DisplayMember[]> {
+  if (!isSanityConfigured) return placeholderTeamMembers;
+
+  try {
+    const members = await sanityClient.fetch<SanityTeamMember[]>(allTeamMembersQuery);
+    if (!members || members.length === 0) return placeholderTeamMembers;
+
+    return members.map((m) => ({
+      slug: m.slug,
+      name: m.name,
+      role: m.role,
+      bio: m.bio,
+      photo: m.photo ? urlForImage(m.photo).width(128).height(128).url() : undefined,
+    }));
+  } catch {
+    return placeholderTeamMembers;
+  }
+}
+
+export default async function TeamGrid() {
+  const teamMembers = await getTeamMembers();
+
   return (
     <section className="bg-white py-20">
       <Container>
@@ -58,7 +99,9 @@ export default function TeamGrid() {
                 {member.name}
               </h3>
               <p className="mt-0.5 text-sm font-medium text-brand-700">{member.role}</p>
-              <p className="mt-3 text-sm leading-relaxed text-ink-500">{member.bio}</p>
+              {member.bio && (
+                <p className="mt-3 text-sm leading-relaxed text-ink-500">{member.bio}</p>
+              )}
             </div>
           ))}
         </div>
