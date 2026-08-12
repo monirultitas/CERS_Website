@@ -28,8 +28,10 @@ export default function GisExplorerPage() {
         <Container>
           <MapExplorer />
           <p className="mt-4 text-xs text-ink-400">
-            Layers shown are illustrative sample data standing in for CERS&rsquo;s live monitoring
-            feeds. Click any point or shaded zone for details.
+            The four research-pillar layers are illustrative sample data standing in for
+            CERS&rsquo;s own monitoring feeds. The satellite view, natural events, and earthquake
+            layers are live data pulled fresh from NASA and USGS on every visit. Click any point or
+            shaded zone for details.
           </p>
         </Container>
       </section>

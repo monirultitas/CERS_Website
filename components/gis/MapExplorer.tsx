@@ -4,9 +4,61 @@ import { useEffect, useRef, useState } from "react";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Map as MapLibreMap, MapLayerMouseEvent } from "maplibre-gl";
 import { gisLayers } from "./gis-layers-config";
+import { fetchLiveNaturalEvents, fetchLiveEarthquakes, gibsTrueColorTileUrl } from "@/lib/live-data";
 
 const DHAKA_CENTER: [number, number] = [90.4074, 23.78];
 const BASEMAP_STYLE = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
+
+const GIBS_DATE_LABEL = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(
+  new Date(Date.now() - 24 * 60 * 60 * 1000)
+);
+
+type PanelLayer = {
+  id: string;
+  name: string;
+  color: string;
+  description: string;
+  live?: boolean;
+};
+
+const livePanelLayers: PanelLayer[] = [
+  {
+    id: "satellite-view",
+    name: `Satellite view (${GIBS_DATE_LABEL})`,
+    color: "#334155",
+    description: "NASA true-color satellite imagery, reprocessed daily (shows yesterday's pass).",
+    live: true,
+  },
+  {
+    id: "natural-events",
+    name: "Active natural events",
+    color: "#e0a458",
+    description: "Storms, wildfires & floods currently tracked by NASA EONET across the region.",
+    live: true,
+  },
+  {
+    id: "earthquakes",
+    name: "Recent earthquakes",
+    color: "#dc2626",
+    description: "Magnitude 4+ earthquakes in the last 90 days, from USGS.",
+    live: true,
+  },
+];
+
+const panelLayers: PanelLayer[] = [
+  ...gisLayers.map((l) => ({ id: l.id, name: l.name, color: l.color, description: l.description })),
+  ...livePanelLayers,
+];
+
+// Which actual MapLibre layer ids each panel toggle controls.
+const LAYER_TOGGLE_MAP: Record<string, string[]> = {
+  ...Object.fromEntries(
+    gisLayers.map((l) => [l.id, l.geometryType === "polygon" ? [l.id, `${l.id}-fill`] : [l.id]])
+  ),
+  "satellite-view": ["gibs-truecolor"],
+  "natural-events": ["natural-events"],
+  earthquakes: ["earthquakes"],
+};
 
 function escapeHtml(value: unknown) {
   return String(value)
@@ -19,7 +71,7 @@ export default function MapExplorer() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const [activeLayers, setActiveLayers] = useState<Set<string>>(
-    () => new Set(gisLayers.map((l) => l.id))
+    () => new Set([...gisLayers.map((l) => l.id), "natural-events", "earthquakes"])
   );
   const [ready, setReady] = useState(false);
 
@@ -42,7 +94,7 @@ export default function MapExplorer() {
       map.addControl(
         new maplibregl.AttributionControl({
           compact: true,
-          customAttribution: "© CARTO © OpenStreetMap contributors",
+          customAttribution: "© CARTO © OpenStreetMap contributors, NASA EONET/GIBS, USGS",
         }),
         "bottom-right"
       );
@@ -53,6 +105,22 @@ export default function MapExplorer() {
 
       map.on("load", async () => {
         try {
+          // Satellite imagery raster, added first so it sits beneath every vector overlay.
+          map.addSource("gibs-truecolor", {
+            type: "raster",
+            tiles: [gibsTrueColorTileUrl()],
+            tileSize: 256,
+            maxzoom: 9,
+            attribution: "NASA EOSDIS GIBS",
+          });
+          map.addLayer({
+            id: "gibs-truecolor",
+            type: "raster",
+            source: "gibs-truecolor",
+            layout: { visibility: "none" },
+            paint: { "raster-opacity": 0.85 },
+          });
+
           for (const layer of gisLayers) {
             const res = await fetch(layer.url);
             const data = await res.json();
@@ -121,6 +189,72 @@ export default function MapExplorer() {
               });
             }
           }
+
+          // Live: NASA EONET natural events.
+          const events = await fetchLiveNaturalEvents().catch(() => null);
+          if (events) {
+            map.addSource("natural-events", { type: "geojson", data: events });
+            map.addLayer({
+              id: "natural-events",
+              type: "circle",
+              source: "natural-events",
+              paint: {
+                "circle-radius": 7,
+                "circle-color": "#e0a458",
+                "circle-stroke-width": 2,
+                "circle-stroke-color": "#ffffff",
+              },
+            });
+            map.on("click", "natural-events", (e: MapLayerMouseEvent) => {
+              const props = e.features?.[0]?.properties ?? {};
+              new maplibregl.Popup({ closeButton: true, maxWidth: "260px" })
+                .setLngLat(e.lngLat)
+                .setHTML(
+                  `<div style="font-family: var(--font-inter), sans-serif; font-size: 13px;">
+                    <div style="font-weight:700; font-size:14px; color:#0b2530;">${escapeHtml(props.title)}</div>
+                    <div style="margin-top:4px;"><span style="color:#7f9dab;font-weight:600;">Category:</span> ${escapeHtml(props.category)}</div>
+                    <div style="margin-top:4px;"><span style="color:#7f9dab;font-weight:600;">Reported:</span> ${escapeHtml(String(props.date).slice(0, 10))}</div>
+                    <div style="margin-top:6px;"><a href="${escapeHtml(props.link)}" target="_blank" rel="noopener noreferrer" style="color:#185c76;">NASA EONET source →</a></div>
+                  </div>`
+                )
+                .addTo(map);
+            });
+            map.on("mouseenter", "natural-events", () => (map.getCanvas().style.cursor = "pointer"));
+            map.on("mouseleave", "natural-events", () => (map.getCanvas().style.cursor = ""));
+          }
+
+          // Live: USGS earthquakes.
+          const quakes = await fetchLiveEarthquakes().catch(() => null);
+          if (quakes) {
+            map.addSource("earthquakes", { type: "geojson", data: quakes });
+            map.addLayer({
+              id: "earthquakes",
+              type: "circle",
+              source: "earthquakes",
+              paint: {
+                "circle-radius": ["interpolate", ["linear"], ["get", "magnitude"], 4, 5, 7, 14],
+                "circle-color": "#dc2626",
+                "circle-opacity": 0.6,
+                "circle-stroke-width": 1.5,
+                "circle-stroke-color": "#dc2626",
+              },
+            });
+            map.on("click", "earthquakes", (e: MapLayerMouseEvent) => {
+              const props = e.features?.[0]?.properties ?? {};
+              new maplibregl.Popup({ closeButton: true, maxWidth: "260px" })
+                .setLngLat(e.lngLat)
+                .setHTML(
+                  `<div style="font-family: var(--font-inter), sans-serif; font-size: 13px;">
+                    <div style="font-weight:700; font-size:14px; color:#0b2530;">M ${escapeHtml(props.magnitude)} — ${escapeHtml(props.place)}</div>
+                    <div style="margin-top:4px;"><span style="color:#7f9dab;font-weight:600;">Date:</span> ${escapeHtml(props.time)}</div>
+                    <div style="margin-top:6px;"><a href="${escapeHtml(props.link)}" target="_blank" rel="noopener noreferrer" style="color:#185c76;">USGS source →</a></div>
+                  </div>`
+                )
+                .addTo(map);
+            });
+            map.on("mouseenter", "earthquakes", () => (map.getCanvas().style.cursor = "pointer"));
+            map.on("mouseleave", "earthquakes", () => (map.getCanvas().style.cursor = ""));
+          }
         } catch (err) {
           console.error("GIS Explorer layer load failed:", err);
         } finally {
@@ -143,10 +277,9 @@ export default function MapExplorer() {
       const next = new Set(prev);
       const isVisible = next.has(id);
       const map = mapRef.current;
-      const layer = gisLayers.find((l) => l.id === id);
-      if (map && layer) {
-        const ids = layer.geometryType === "polygon" ? [id, `${id}-fill`] : [id];
-        for (const layerId of ids) {
+      const mapLayerIds = LAYER_TOGGLE_MAP[id];
+      if (map && mapLayerIds) {
+        for (const layerId of mapLayerIds) {
           if (map.getLayer(layerId)) {
             map.setLayoutProperty(layerId, "visibility", isVisible ? "none" : "visible");
           }
@@ -165,10 +298,10 @@ export default function MapExplorer() {
           <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-ink-500">
             Layers
           </h3>
-          <span className="text-xs text-ink-400">Illustrative sample data</span>
+          <span className="text-xs text-ink-400">Sample data + live NASA/USGS feeds</span>
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
-          {gisLayers.map((layer) => {
+          {panelLayers.map((layer) => {
             const active = activeLayers.has(layer.id);
             return (
               <button
@@ -188,6 +321,11 @@ export default function MapExplorer() {
                   style={{ backgroundColor: active ? layer.color : "#c7d2d8" }}
                 />
                 {layer.name}
+                {layer.live && (
+                  <span className="rounded-full bg-moss-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-moss-700">
+                    Live
+                  </span>
+                )}
               </button>
             );
           })}
