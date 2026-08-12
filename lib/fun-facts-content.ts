@@ -2,74 +2,115 @@ import type { QuizQuestion } from "./gis-lab-content";
 
 export type FunFact = {
   emoji: string;
+  /** Short, 2-5 word label shown by default on the visual tile. */
+  short: string;
   title: string;
   fact: string;
 };
 
-export const funFacts: FunFact[] = [
+// Facts with a real place on the map — shown as pins on FunFactsMap.
+export type MapFact = FunFact & { coordinates: [number, number] };
+
+export const mapFacts: MapFact[] = [
   {
     emoji: "🐅",
+    short: "Swimming tigers",
     title: "The Sundarbans is the largest mangrove forest on Earth",
-    fact: "Shared between Bangladesh and India, the Sundarbans is home to the Royal Bengal Tiger — the only big cat population in the world adapted to swim between mangrove islands and hunt in tidal water.",
-  },
-  {
-    emoji: "🌊",
-    title: "Bangladesh sits on the world's largest river delta",
-    fact: "The Ganges–Brahmaputra–Meghna Delta drains water from the Himalayas across three countries before fanning out into the Bay of Bengal — which is exactly why remote sensing matters so much here: the land itself is reshaped by rivers year to year.",
+    fact: "Shared between Bangladesh and India, it's home to the Royal Bengal Tiger — the only big cat population known to regularly swim between mangrove islands to hunt.",
+    coordinates: [89.1833, 21.9497],
   },
   {
     emoji: "🏖️",
-    title: "Cox's Bazar is often called the world's longest natural sea beach",
-    fact: "Its unbroken, 120km sandy shoreline (no cliffs or rocky breaks) is why it claims the \"longest natural beach\" title — though depending on how you measure, a few beaches elsewhere edge it out on raw length.",
-  },
-  {
-    emoji: "🗺️",
-    title: "Nobody actually agrees on how many rivers Bangladesh has",
-    fact: "Estimates range from around 300 to over 1,000, depending on the season and who's counting — rivers here shift course, dry up, and reappear often enough that a fixed number is almost a contradiction in terms.",
-  },
-  {
-    emoji: "📏",
-    title: "It's one of the flattest large countries on Earth",
-    fact: "Most of Bangladesh sits less than 10 meters above sea level. That flatness is a big reason satellite-derived elevation and flood models are so critical here — a few centimeters of water-level change can submerge huge areas.",
+    short: "120km of sand",
+    title: "Cox's Bazar — often called the world's longest natural sea beach",
+    fact: "Its unbroken, 120km sandy shoreline (no cliffs or rocky breaks) is why it claims the \"longest natural beach\" title.",
+    coordinates: [92.0058, 21.4272],
   },
   {
     emoji: "🏙️",
+    short: "44,000 people/km²",
     title: "Dhaka is one of the most densely populated cities on the planet",
-    fact: "By some measures, the city proper runs around 44,000 people per square kilometer — well above Manhattan's roughly 29,000, one of the densest urban populations on Earth.",
+    fact: "By some measures, the city proper runs around 44,000 people per square kilometer — denser than Manhattan.",
+    coordinates: [90.4125, 23.8103],
   },
   {
-    emoji: "🇳🇱",
-    title: "Bangladesh and the Netherlands are geographic cousins",
-    fact: "Both are low-lying delta nations built on river silt, both engineer extensively around flooding — but Bangladesh packs roughly ten times the Netherlands' population into a similarly flood-exposed landscape.",
-  },
-  {
-    emoji: "🛰️",
-    title: "Satellites have been watching Bangladesh change since 1972",
-    fact: "NASA's Landsat program has continuously imaged Earth's surface since Landsat 1 launched in July 1972 — over 50 years of uninterrupted record, long enough to watch entire rivers migrate across the delta.",
-  },
-  {
-    emoji: "📡",
-    title: "One satellite \"tile\" can cover an entire small country",
-    fact: "A single Sentinel-2 image tile covers about 110km × 110km — roughly 12,000 square kilometers in one shot, which is why satellite monitoring can cover Bangladesh's water bodies far faster than any ground survey.",
-  },
-  {
-    emoji: "🚩",
-    title: "The flag's red circle isn't just a design choice",
-    fact: "The green field represents the lush vegetation of the land; the red disc represents both the sun rising over Bengal and the blood of those who died in the 1971 Liberation War.",
+    emoji: "🌊",
+    short: "3 rivers, 1 delta",
+    title: "The world's largest river delta",
+    fact: "Near Chandpur, the Ganges, Brahmaputra, and Meghna converge before fanning into the Bay of Bengal — the largest river delta on Earth.",
+    coordinates: [90.65, 23.23],
   },
 ];
 
-export type BdWorldStat = {
+// Facts without a single map location — shown as compact click-to-reveal tiles.
+export const funFacts: FunFact[] = [
+  {
+    emoji: "🗺️",
+    short: "Nobody agrees",
+    title: "How many rivers does Bangladesh actually have?",
+    fact: "Estimates range from around 300 to over 1,000 — rivers here shift course, dry up, and reappear often enough that a fixed count never sticks.",
+  },
+  {
+    emoji: "📏",
+    short: "Almost perfectly flat",
+    title: "One of the flattest large countries on Earth",
+    fact: "Most of Bangladesh sits less than 10 meters above sea level — a few centimeters of water-level change can submerge huge areas.",
+  },
+  {
+    emoji: "🇳🇱",
+    short: "Delta cousins",
+    title: "Bangladesh and the Netherlands are geographic cousins",
+    fact: "Both are low-lying delta nations built on river silt — but Bangladesh packs roughly ten times the Netherlands' population into a similarly flood-exposed landscape.",
+  },
+  {
+    emoji: "🛰️",
+    short: "50+ years watching",
+    title: "Satellites have watched Bangladesh change since 1972",
+    fact: "NASA's Landsat program has continuously imaged Earth's surface since July 1972 — long enough to watch entire rivers migrate across the delta.",
+  },
+  {
+    emoji: "📡",
+    short: "One shot, 12,000 km²",
+    title: "One satellite \"tile\" can cover an entire small country",
+    fact: "A single Sentinel-2 image tile covers about 110km × 110km — which is why satellite monitoring beats any ground survey for speed.",
+  },
+  {
+    emoji: "🚩",
+    short: "Not just a design",
+    title: "The flag's red circle carries real meaning",
+    fact: "Green represents lush vegetation; the red disc represents both the sun rising over Bengal and the blood of 1971's Liberation War martyrs.",
+  },
+];
+
+export type CompareStat = {
   label: string;
-  bd: string;
-  comparison: string;
+  value: number;
+  displayValue: string;
 };
 
-export const bdVsWorld: BdWorldStat[] = [
-  { label: "Longest natural sea beach", bd: "Cox's Bazar, ~120 km", comparison: "unbroken by cliffs or rock" },
-  { label: "Largest mangrove forest", bd: "The Sundarbans", comparison: "shared with India" },
-  { label: "Largest river delta", bd: "Ganges–Brahmaputra–Meghna", comparison: "drains 3 countries" },
-  { label: "Continuous satellite record", bd: "50+ years (Landsat, since 1972)", comparison: "oldest Earth-imaging program" },
+export type Comparison = {
+  title: string;
+  unit: string;
+  stats: CompareStat[];
+};
+
+export const comparisons: Comparison[] = [
+  {
+    title: "Population density",
+    unit: "people per km²",
+    stats: [
+      { label: "Dhaka (city proper)", value: 44000, displayValue: "~44,000" },
+      { label: "Manhattan", value: 28872, displayValue: "~28,900" },
+    ],
+  },
+  {
+    title: "Total population",
+    unit: "million people, 2025",
+    stats: [
+      { label: "Bangladesh", value: 175, displayValue: "~175M" },
+      { label: "Netherlands", value: 18, displayValue: "~18M" },
+    ],
+  },
 ];
 
 export const trivia: QuizQuestion[] = [
