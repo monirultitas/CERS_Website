@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/layout/Container";
-import Logo from "@/components/layout/Logo";
 import { siteConfig } from "@/lib/site-config";
 import { areaImages } from "@/lib/media";
 
@@ -18,7 +17,6 @@ export default function Hero() {
 
       <Container className="relative grid grid-cols-1 items-center gap-12 py-24 lg:grid-cols-2 lg:py-32">
         <div>
-          <Logo variant="light" height={40} className="mb-7" />
           <span className="inline-flex items-center gap-2 rounded-full border border-brand-700/60 bg-brand-950/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-300">
             GIS &amp; Remote Sensing Research
           </span>
