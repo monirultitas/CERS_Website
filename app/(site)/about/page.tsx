@@ -11,16 +11,13 @@ export const metadata: Metadata = {
     "CERS is a Dhaka-based nonprofit turning satellite imagery and geospatial analysis into evidence-based environmental policy for Bangladesh.",
 };
 
-// Re-check Sanity for new/updated team members every hour instead of only at build time.
-export const revalidate = 3600;
-
 export default function AboutPage() {
   return (
     <>
       <PageHero
         eyebrow="About CERS"
         title="A geospatial research group with its feet in the field."
-        description="We read landscapes from orbit, then walk them — pairing remote sensing with environmental chemistry to give policymakers evidence they can trust."
+        description="We read landscapes from orbit, then walk them, pairing remote sensing with environmental chemistry to give policymakers evidence they can trust."
         image={aboutImage.src}
         imageAlt={aboutImage.alt}
         photoCredit={aboutImage.credit}
@@ -30,17 +27,17 @@ export default function AboutPage() {
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <h2 className="font-display text-3xl font-bold text-ink-900">Our story</h2>
-            <div className="mt-6 space-y-5 text-base leading-relaxed text-ink-600">
+            <div className="mt-6 space-y-5 text-justify text-base leading-relaxed text-ink-600">
               <p>
-                CERS — the Center for Environmental Research &amp; Sustainability — was founded
+                CERS, the Center for Environmental Research &amp; Sustainability, was founded
                 on a simple premise: Bangladesh&rsquo;s environmental and public-health challenges
                 are fundamentally spatial. Water pollution, flood risk, groundwater stress, and
                 heat exposure all vary block by block across a rapidly urbanizing landscape, and
                 policy built on averages misses that variation entirely.
               </p>
               <p>
-                So we lead with geospatial intelligence — satellite imagery, GeoAI, and spatial
-                analysis — to see where problems actually concentrate. Environmental chemistry and
+                So we lead with geospatial intelligence: satellite imagery, GeoAI, and spatial
+                analysis, to see where problems actually concentrate. Environmental chemistry and
                 field sampling then ground-truth what the imagery shows, turning pixels into
                 defensible, publishable evidence.
               </p>

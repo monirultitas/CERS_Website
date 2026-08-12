@@ -245,7 +245,7 @@ export default function MapExplorer() {
                 .setLngLat(e.lngLat)
                 .setHTML(
                   `<div style="font-family: var(--font-inter), sans-serif; font-size: 13px;">
-                    <div style="font-weight:700; font-size:14px; color:#0b2530;">M ${escapeHtml(props.magnitude)} — ${escapeHtml(props.place)}</div>
+                    <div style="font-weight:700; font-size:14px; color:#0b2530;">M ${escapeHtml(props.magnitude)}, ${escapeHtml(props.place)}</div>
                     <div style="margin-top:4px;"><span style="color:#7f9dab;font-weight:600;">Date:</span> ${escapeHtml(props.time)}</div>
                     <div style="margin-top:6px;"><a href="${escapeHtml(props.link)}" target="_blank" rel="noopener noreferrer" style="color:#185c76;">USGS source →</a></div>
                   </div>`

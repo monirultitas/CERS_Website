@@ -25,7 +25,7 @@ export default function NewsPage() {
       <PageHero
         eyebrow="News"
         title="Field notes, from the pixel grid to the ground."
-        description="Updates from active research — new datasets, published findings, and what we're seeing in the field."
+        description="Updates from active research: new datasets, published findings, and what we're seeing in the field."
         image={areaImages["climate-health"].src}
         imageAlt={areaImages["climate-health"].alt}
         photoCredit={areaImages["climate-health"].credit}

@@ -54,7 +54,7 @@ export default function FunFactsMap() {
             <div style="font-weight:700; font-size:14px; color:#0b2530; margin-bottom:4px;">${escapeHtml(
               item.title
             )}</div>
-            <div style="color:#3b5c6c; line-height:1.5;">${escapeHtml(item.fact)}</div>
+            <div style="color:#3b5c6c; line-height:1.5; text-align:justify;">${escapeHtml(item.fact)}</div>
           </div>`
         );
 

@@ -12,7 +12,7 @@ export const researchDetails: ResearchDetail[] = [
   {
     slug: "geoai-remote-sensing",
     name: "GeoAI & Remote Sensing",
-    tagline: "The engine behind every CERS study — satellite imagery turned into spatial evidence.",
+    tagline: "The engine behind every CERS study: satellite imagery turned into spatial evidence.",
     isCore: true,
     overview:
       "This is the discipline everything else at CERS is built on. We process multispectral and radar satellite imagery, build machine-learning models over spatial data, and turn raw pixels into land cover, water extent, and change-detection layers that the rest of our research runs on top of.",
@@ -75,7 +75,7 @@ export const researchDetails: ResearchDetail[] = [
     tagline: "Nutrition surveillance and disease mapping under a changing climate.",
     isCore: false,
     overview:
-      "Climate variables — heat, flooding, water access — shape public health outcomes in ways that are highly local. We map disease and nutrition patterns against environmental and climate data to surface where interventions matter most.",
+      "Climate variables, including heat, flooding, and water access, shape public health outcomes in ways that are highly local. We map disease and nutrition patterns against environmental and climate data to surface where interventions matter most.",
     focusAreas: [
       "Spatial mapping of climate-sensitive disease patterns",
       "Nutrition surveillance linked to environmental stressors",

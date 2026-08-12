@@ -46,7 +46,7 @@ export default async function ResearchDetailPage({
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <h2 className="font-display text-2xl font-bold text-ink-900">Overview</h2>
-            <p className="mt-4 text-base leading-relaxed text-ink-600">{area.overview}</p>
+            <p className="mt-4 text-justify text-base leading-relaxed text-ink-600">{area.overview}</p>
 
             <h2 className="font-display mt-12 text-2xl font-bold text-ink-900">Focus areas</h2>
             <ul className="mt-4 space-y-3">

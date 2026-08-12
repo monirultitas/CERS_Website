@@ -55,7 +55,7 @@ export default function Hero() {
           </div>
           <p className="mt-2 max-w-xs text-right text-xs italic leading-snug text-ink-300">
             &ldquo;Near things are more related than distant things.&rdquo;{" "}
-            <span className="not-italic text-ink-400">— Tobler&rsquo;s First Law of Geography</span>
+            <span className="not-italic text-ink-400">Tobler&rsquo;s First Law of Geography</span>
           </p>
         </div>
       </Container>

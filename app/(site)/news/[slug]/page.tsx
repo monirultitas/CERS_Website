@@ -55,7 +55,7 @@ export default async function NewsDetailPage({
 
       <section className="bg-white py-20">
         <Container className="max-w-3xl">
-          <div className="space-y-5 text-base leading-relaxed text-ink-600">
+          <div className="space-y-5 text-justify text-base leading-relaxed text-ink-600">
             {post.body.map((para, i) => (
               <p key={i}>{para}</p>
             ))}

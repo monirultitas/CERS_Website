@@ -7,7 +7,7 @@ export default function Quiz({
   questions,
   perfectMessage = "Perfect score!",
   passMessage = "Solid result.",
-  failMessage = "A good start — try again to beat it.",
+  failMessage = "A good start. Try again to beat it.",
 }: {
   questions: QuizQuestion[];
   /** Shown when the player gets every question right. */
@@ -108,7 +108,7 @@ export default function Quiz({
       </div>
 
       {selected !== null && (
-        <div className="mt-5 rounded-lg bg-ink-50/80 p-4 text-sm leading-relaxed text-ink-600">
+        <div className="mt-5 rounded-lg bg-ink-50/80 p-4 text-justify text-sm leading-relaxed text-ink-600">
           {question.explanation}
         </div>
       )}

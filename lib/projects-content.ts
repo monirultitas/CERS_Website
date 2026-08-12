@@ -27,7 +27,7 @@ export const projects: Project[] = [
       "A six-year satellite time series tracking organic pollution and eutrophication across Dhaka's urban canals and lakes.",
     description: [
       "This project builds a continuous, satellite-derived record of water quality across Dhaka's urban water bodies, combining Google Earth Engine processing with field-based chemistry sampling for validation.",
-      "The resulting time series lets city agencies see not just where water quality is poor, but how fast it's deteriorating — and where interventions have measurably helped.",
+      "The resulting time series lets city agencies see not just where water quality is poor, but how fast it's deteriorating, and where interventions have measurably helped.",
     ],
     partners: ["Local water utilities", "City environmental agencies"],
     highlights: [

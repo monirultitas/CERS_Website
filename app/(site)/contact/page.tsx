@@ -8,7 +8,7 @@ import { aboutImage } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with CERS — Center for Environmental Research & Sustainability.",
+  description: "Get in touch with CERS, the Center for Environmental Research & Sustainability.",
 };
 
 export default function ContactPage() {

@@ -29,7 +29,7 @@ export default function FactGrid() {
               {item.short}
             </span>
             {open && (
-              <span className="mt-3 text-left text-xs leading-relaxed text-ink-600">
+              <span className="mt-3 block text-justify text-xs leading-relaxed text-ink-600">
                 <span className="font-display block text-sm font-semibold text-ink-900">
                   {item.title}
                 </span>

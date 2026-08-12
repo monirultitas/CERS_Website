@@ -25,7 +25,7 @@ export const newsPosts: NewsPost[] = [
     tags: ["GeoAI", "Flood Risk", "Remote Sensing"],
     body: [
       "Ahead of this year's monsoon season, our GIS team trained a machine-learning model over fused Sentinel-1 radar and Sentinel-2 optical imagery to flag flood-prone corridors across greater Dhaka before the rains arrive.",
-      "Radar imagery lets the model see through cloud cover, which is exactly when optical satellites are least useful — during active storm systems. Combining both data sources gives a more reliable all-weather read on where water is likely to pool.",
+      "Radar imagery lets the model see through cloud cover, which is exactly when optical satellites are least useful: during active storm systems. Combining both data sources gives a more reliable all-weather read on where water is likely to pool.",
       "The resulting risk map has been shared with local disaster-management offices as an early-warning input, and we'll be publishing an accuracy assessment once this season's ground-truth data comes in.",
     ],
   },
@@ -69,15 +69,15 @@ export const newsPosts: NewsPost[] = [
     author: "Md Sayem Ahmmed Ripon",
     tags: ["Climate & Health", "Public Health", "Spatial Epidemiology"],
     body: [
-      "Heat, flooding, and water access don't affect health outcomes uniformly — risk concentrates in specific districts shaped by infrastructure, income, and exposure. This pilot overlays nutrition surveillance data with satellite-derived heat and flood exposure layers to surface where that risk is highest.",
-      "Early results point to a small number of flood-prone, low-infrastructure districts carrying a disproportionate share of climate-linked health risk — useful signal for agencies deciding where to prioritize interventions with limited resources.",
+      "Heat, flooding, and water access don't affect health outcomes uniformly; risk concentrates in specific districts shaped by infrastructure, income, and exposure. This pilot overlays nutrition surveillance data with satellite-derived heat and flood exposure layers to surface where that risk is highest.",
+      "Early results point to a small number of flood-prone, low-infrastructure districts carrying a disproportionate share of climate-linked health risk, a useful signal for agencies deciding where to prioritize interventions with limited resources.",
     ],
   },
   {
     slug: "dhaka-metro-land-cover-baseline-published",
     title: "Dhaka Metro Land Cover Baseline Now Published",
     excerpt:
-      "Our multi-year land-cover classification dataset — the foundation several other CERS projects build on — is now complete.",
+      "Our multi-year land-cover classification dataset, the foundation several other CERS projects build on, is now complete.",
     category: "GeoAI & Remote Sensing",
     date: "2025-11-30",
     author: "Zia Mohammad Nazim Uddin",
@@ -85,7 +85,7 @@ export const newsPosts: NewsPost[] = [
     body: [
       "After two years of work, our Dhaka Metro land cover change detection project has reached completion, producing a classified, multi-year dataset built from Landsat and Sentinel-2 imagery.",
       "The headline finding: measurable, accelerating loss of green space and water body area to urban expansion over the study period. But just as important, this dataset now underpins the flood-risk and water-quality work published since.",
-      "The classified layers are available to research and policy partners on request — reach out via our contact page.",
+      "The classified layers are available to research and policy partners on request. Reach out via our contact page.",
     ],
   },
 ];

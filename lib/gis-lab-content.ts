@@ -16,14 +16,14 @@ export const quizQuestions: QuizQuestion[] = [
     ],
     correctIndex: 0,
     explanation:
-      "GIS captures, stores, analyzes, and displays data tied to a location — the foundation of everything CERS does.",
+      "GIS captures, stores, analyzes, and displays data tied to a location: the foundation of everything CERS does.",
   },
   {
     question: "Remote sensing most often collects data using:",
     options: ["Underground sensors", "Satellites or aircraft", "Door-to-door surveys", "Seismographs"],
     correctIndex: 1,
     explanation:
-      "Remote sensing means gathering information about the Earth's surface without physical contact — usually from satellites or aircraft.",
+      "Remote sensing means gathering information about the Earth's surface without physical contact, usually from satellites or aircraft.",
   },
   {
     question: "NDVI is commonly used to measure:",
@@ -42,7 +42,7 @@ export const quizQuestions: QuizQuestion[] = [
     ],
     correctIndex: 0,
     explanation:
-      "Raster data is pixel-based — think satellite imagery. Vector data, by contrast, uses points, lines, and polygons.",
+      "Raster data is pixel-based, think satellite imagery. Vector data, by contrast, uses points, lines, and polygons.",
   },
   {
     question: "Which of these is a real satellite program used for open Earth observation?",
@@ -61,7 +61,7 @@ export const quizQuestions: QuizQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "A 10-meter spatial resolution means each pixel represents a 10×10 meter area on the ground — finer resolution reveals smaller features.",
+      "A 10-meter spatial resolution means each pixel represents a 10×10 meter area on the ground; finer resolution reveals smaller features.",
   },
   {
     question: "Tobler's First Law of Geography states that:",
@@ -72,7 +72,7 @@ export const quizQuestions: QuizQuestion[] = [
       "Water always flows toward the equator",
     ],
     correctIndex: 1,
-    explanation: "It's the spatial principle behind interpolation, clustering, and most of spatial analysis — and the quote on our About page.",
+    explanation: "It's the spatial principle behind interpolation, clustering, and most of spatial analysis, and the quote on our About page.",
   },
   {
     question: "In GeoAI, machine learning models are often trained to:",
@@ -84,7 +84,7 @@ export const quizQuestions: QuizQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "CERS uses GeoAI to classify land cover, flag flood risk, and detect change over time from satellite imagery — augmenting, not replacing, field work.",
+      "CERS uses GeoAI to classify land cover, flag flood risk, and detect change over time from satellite imagery, augmenting rather than replacing field work.",
   },
 ];
 
@@ -112,7 +112,7 @@ export const dhakaLandmarks: Landmark[] = [
   },
   {
     name: "Hatirjheel",
-    hint: "An urban lake and traffic corridor — also one of our water-quality monitoring points.",
+    hint: "An urban lake and traffic corridor, also one of our water-quality monitoring points.",
     coordinates: [90.4083, 23.755],
   },
   {

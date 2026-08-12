@@ -15,7 +15,7 @@ export default function Logo({ variant = "dark", className = "", height = 36 }: 
   const image = (
     <Image
       src="/logo.png"
-      alt="CERS — Center for Environmental Research & Sustainability"
+      alt="CERS, Center for Environmental Research & Sustainability"
       width={Math.round(height * LOGO_ASPECT)}
       height={height}
       priority

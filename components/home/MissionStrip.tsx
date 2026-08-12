@@ -28,11 +28,11 @@ export default function MissionStrip() {
             Near things are more related than distant things.
           </h2>
           <p className="mt-2 text-sm text-ink-400">
-            Tobler&rsquo;s First Law of Geography — the spatial premise behind everything CERS
+            Tobler&rsquo;s First Law of Geography, the spatial premise behind everything CERS
             builds.
           </p>
-          <p className="mt-6 text-base leading-relaxed text-ink-600">
-            {`We're a Dhaka-based nonprofit that reads landscapes from orbit — turning satellite
+          <p className="mt-6 text-justify text-base leading-relaxed text-ink-600">
+            {`We're a Dhaka-based nonprofit that reads landscapes from orbit, turning satellite
             imagery and geospatial analysis into evidence policymakers can act on. Environmental
             chemistry, water quality, and pollution work sit downstream of that core geospatial
             capability, giving the numbers ground-truth.`}

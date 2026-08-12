@@ -64,9 +64,9 @@ export default function FunFactsPage() {
             <div className="mt-6 max-w-xl">
               <Quiz
                 questions={trivia}
-                perfectMessage="Flawless — you could give the office tour."
+                perfectMessage="Flawless! You could give the office tour."
                 passMessage="Solid! You were paying attention."
-                failMessage="Worth a re-read — the facts are right above."
+                failMessage="Worth a re-read. The facts are right above."
               />
             </div>
           </div>

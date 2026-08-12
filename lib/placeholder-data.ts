@@ -33,7 +33,7 @@ export const teamMembers: TeamMember[] = [
     slug: "shuvo-kumar-chowdhury",
     name: "Shuvo Kumar Chowdhury",
     role: "GIS Specialist & Technical Lead",
-    bio: "Leads the geospatial pipeline — from satellite data ingestion to the maps you see on this site.",
+    bio: "Leads the geospatial pipeline, from satellite data ingestion to the maps you see on this site.",
   },
   {
     slug: "asraf-khan",

@@ -48,7 +48,7 @@ export default async function ProjectDetailPage({
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <h2 className="font-display text-2xl font-bold text-ink-900">About this project</h2>
-            <div className="mt-4 space-y-5 text-base leading-relaxed text-ink-600">
+            <div className="mt-4 space-y-5 text-justify text-base leading-relaxed text-ink-600">
               {project.description.map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
