@@ -19,6 +19,9 @@ export default function ProjectsPage() {
         eyebrow="Projects"
         title="Research in the field, mapped from orbit."
         description="A working record of CERS's active and completed projects, each anchored to one of our four research pillars."
+        image={areaImages["water-sustainability"].src}
+        imageAlt={areaImages["water-sustainability"].alt}
+        photoCredit={areaImages["water-sustainability"].credit}
       />
 
       <section className="bg-white py-20">
