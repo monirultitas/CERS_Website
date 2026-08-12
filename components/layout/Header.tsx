@@ -18,7 +18,7 @@ export default function Header() {
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
           {navItems.map((item) => {
             const active =
               item.href === "/" ? pathname === "/" : pathname?.startsWith(item.href);
@@ -26,7 +26,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                className={`shrink-0 whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-medium transition-colors xl:px-4 ${
                   active
                     ? "bg-brand-50 text-brand-700"
                     : "text-ink-600 hover:bg-ink-50 hover:text-ink-900"
@@ -52,7 +52,7 @@ export default function Header() {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label="Toggle navigation menu"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-ink-700 hover:bg-ink-50 xl:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-ink-700 hover:bg-ink-50 lg:hidden"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             {open ? (
@@ -75,7 +75,7 @@ export default function Header() {
       </Container>
 
       {open && (
-        <div className="border-t border-ink-100 bg-white xl:hidden">
+        <div className="border-t border-ink-100 bg-white lg:hidden">
           <Container className="flex flex-col gap-1 py-4">
             {navItems.map((item) => {
               const active =
