@@ -19,6 +19,9 @@ export default function ResearchPage() {
         eyebrow="Research"
         title="GIS and remote sensing lead. Everything else builds on it."
         description="Four research pillars, ordered by how our workflow actually runs — from orbit down to policy."
+        image={areaImages["geoai-remote-sensing"].src}
+        imageAlt={areaImages["geoai-remote-sensing"].alt}
+        photoCredit={areaImages["geoai-remote-sensing"].credit}
       />
 
       <section className="bg-white py-20">
