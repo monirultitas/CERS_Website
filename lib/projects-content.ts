@@ -9,6 +9,8 @@ export type Project = {
   status: ProjectStatus;
   timeframe: string;
   location: string;
+  /** Approximate [lng, lat] for the Project & Impact Map. */
+  coordinates: [number, number];
   summary: string;
   description: string[];
   partners: string[];
@@ -23,6 +25,7 @@ export const projects: Project[] = [
     status: "Ongoing",
     timeframe: "2019 – Present",
     location: "Dhaka Metropolitan Area",
+    coordinates: [90.4074, 23.755],
     summary:
       "A six-year satellite time series tracking organic pollution and eutrophication across Dhaka's urban canals and lakes.",
     description: [
@@ -43,6 +46,7 @@ export const projects: Project[] = [
     status: "Ongoing",
     timeframe: "2024 – Present",
     location: "Greater Dhaka & river corridors",
+    coordinates: [90.42, 23.89],
     summary:
       "Machine learning models over satellite land cover to flag high-risk flood corridors ahead of monsoon season.",
     description: [
@@ -63,6 +67,7 @@ export const projects: Project[] = [
     status: "Ongoing",
     timeframe: "2023 – Present",
     location: "Mohammadpur & surrounding wards",
+    coordinates: [90.3585, 23.766],
     summary:
       "Site suitability mapping and groundwater modeling to ease urban aquifer pressure through decentralized rainwater capture.",
     description: [
@@ -83,6 +88,7 @@ export const projects: Project[] = [
     status: "Ongoing",
     timeframe: "2022 – Present",
     location: "Dhaka & flood-prone districts",
+    coordinates: [90.45, 23.705],
     summary:
       "Mapping nutrition and disease patterns against climate and environmental stressors to target public-health interventions.",
     description: [
@@ -103,6 +109,7 @@ export const projects: Project[] = [
     status: "Completed",
     timeframe: "2021 – 2023",
     location: "Dhaka Metropolitan Area",
+    coordinates: [90.385, 23.81],
     summary:
       "A baseline land-cover change dataset tracking urban expansion, green space loss, and water body shrinkage across metro Dhaka.",
     description: [

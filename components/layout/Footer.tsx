@@ -26,6 +26,14 @@ export default function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/satellite-comparator"
+                className="text-sm text-ink-300 hover:text-brand-300"
+              >
+                Satellite Comparator
+              </Link>
+            </li>
           </ul>
         </div>
 

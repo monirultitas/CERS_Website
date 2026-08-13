@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import Container from "@/components/layout/Container";
+import ProjectImpactMap from "@/components/gis/ProjectImpactMap";
 import { projects } from "@/lib/projects-content";
 import { getResearchDetail } from "@/lib/research-content";
 import { areaImages } from "@/lib/media";
@@ -24,9 +25,23 @@ export default function ProjectsPage() {
         photoCredit={areaImages["water-sustainability"].credit}
       />
 
-      <section className="bg-white py-20">
+      <section className="bg-white pt-16">
         <Container>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <h2 className="font-display text-2xl font-bold text-ink-900">Where we work</h2>
+          <p className="mt-2 max-w-2xl text-ink-500">
+            Every CERS project on one map. Filter by research theme or status, and click a marker
+            to open the project.
+          </p>
+          <div className="mt-6">
+            <ProjectImpactMap />
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-white py-16">
+        <Container>
+          <h2 className="font-display text-2xl font-bold text-ink-900">All projects</h2>
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
             {projects.map((project) => {
               const area = getResearchDetail(project.areaSlug);
               const image = areaImages[project.areaSlug];
