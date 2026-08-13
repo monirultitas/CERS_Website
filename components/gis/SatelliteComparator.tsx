@@ -7,7 +7,8 @@ import {
   comparatorLocations,
   comparatorLayers,
   comparatorYears,
-  dateForYear,
+  comparatorSeasons,
+  dateFor,
   gibsTileUrl,
 } from "@/lib/satellite-comparator-config";
 
@@ -18,15 +19,23 @@ export default function SatelliteComparator() {
   const afterMap = useRef<MapLibreMap | null>(null);
   const syncing = useRef(false);
 
+  // Default to the same recent year, dry season vs monsoon — the single most
+  // dramatic, reliable change MODIS shows over Bangladesh.
   const [locationId, setLocationId] = useState(comparatorLocations[0].id);
-  const [layerId, setLayerId] = useState(comparatorLayers[0].id);
-  const [beforeYear, setBeforeYear] = useState(2012);
-  const [afterYear, setAfterYear] = useState(2024);
+  const [layerId, setLayerId] = useState("falsecolor");
+  const [beforeYear, setBeforeYear] = useState(2023);
+  const [beforeSeason, setBeforeSeason] = useState("dry");
+  const [afterYear, setAfterYear] = useState(2023);
+  const [afterSeason, setAfterSeason] = useState("monsoon");
   const [split, setSplit] = useState(50);
   const [ready, setReady] = useState(false);
 
-  const location = comparatorLocations.find((l) => l.id === locationId)!;
-  const layer = comparatorLayers.find((l) => l.id === layerId)!;
+  const location = comparatorLocations.find((l) => l.id === locationId) ?? comparatorLocations[0];
+  const layer = comparatorLayers.find((l) => l.id === layerId) ?? comparatorLayers[0];
+  const beforeSeasonObj =
+    comparatorSeasons.find((s) => s.id === beforeSeason) ?? comparatorSeasons[0];
+  const afterSeasonObj =
+    comparatorSeasons.find((s) => s.id === afterSeason) ?? comparatorSeasons[0];
 
   // Create both maps once.
   useEffect(() => {
@@ -95,24 +104,24 @@ export default function SatelliteComparator() {
     };
   }, []);
 
-  // Swap the GIBS raster layer whenever layer or a year changes.
+  // Swap the GIBS raster layer whenever the imagery type or either date changes.
   useEffect(() => {
-    function setLayer(map: MapLibreMap | null, year: number) {
+    function setLayer(map: MapLibreMap | null, date: string) {
       if (!map || !map.isStyleLoaded()) return;
       const srcId = "gibs";
       if (map.getLayer("gibs-layer")) map.removeLayer("gibs-layer");
       if (map.getSource(srcId)) map.removeSource(srcId);
       map.addSource(srcId, {
         type: "raster",
-        tiles: [gibsTileUrl(layer.gibsLayer, dateForYear(year))],
+        tiles: [gibsTileUrl(layer.gibsLayer, date)],
         tileSize: 256,
         maxzoom: 9,
       });
       map.addLayer({ id: "gibs-layer", type: "raster", source: srcId });
     }
-    setLayer(beforeMap.current, beforeYear);
-    setLayer(afterMap.current, afterYear);
-  }, [layer, beforeYear, afterYear, ready]);
+    setLayer(beforeMap.current, dateFor(beforeYear, beforeSeason));
+    setLayer(afterMap.current, dateFor(afterYear, afterSeason));
+  }, [layer, beforeYear, beforeSeason, afterYear, afterSeason, ready]);
 
   // Fly both maps to a new location preset.
   useEffect(() => {
@@ -150,35 +159,64 @@ export default function SatelliteComparator() {
             ))}
           </select>
         </Field>
-        <Field label={`Before (${beforeYear})`}>
-          <select
-            value={beforeYear}
-            onChange={(e) => setBeforeYear(Number(e.target.value))}
-            className="w-full rounded-lg border border-ink-200 px-3 py-2 text-sm"
-          >
-            {comparatorYears.map((y) => (
-              <option key={y} value={y}>
-                {y}
-              </option>
-            ))}
-          </select>
+        <Field label="Before (left)">
+          <div className="flex gap-2">
+            <select
+              value={beforeSeason}
+              onChange={(e) => setBeforeSeason(e.target.value)}
+              className="w-full rounded-lg border border-ink-200 px-2 py-2 text-sm"
+            >
+              {comparatorSeasons.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+            <select
+              value={beforeYear}
+              onChange={(e) => setBeforeYear(Number(e.target.value))}
+              className="rounded-lg border border-ink-200 px-2 py-2 text-sm"
+            >
+              {comparatorYears.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
+            </select>
+          </div>
         </Field>
-        <Field label={`After (${afterYear})`}>
-          <select
-            value={afterYear}
-            onChange={(e) => setAfterYear(Number(e.target.value))}
-            className="w-full rounded-lg border border-ink-200 px-3 py-2 text-sm"
-          >
-            {comparatorYears.map((y) => (
-              <option key={y} value={y}>
-                {y}
-              </option>
-            ))}
-          </select>
+        <Field label="After (right)">
+          <div className="flex gap-2">
+            <select
+              value={afterSeason}
+              onChange={(e) => setAfterSeason(e.target.value)}
+              className="w-full rounded-lg border border-ink-200 px-2 py-2 text-sm"
+            >
+              {comparatorSeasons.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+            <select
+              value={afterYear}
+              onChange={(e) => setAfterYear(Number(e.target.value))}
+              className="rounded-lg border border-ink-200 px-2 py-2 text-sm"
+            >
+              {comparatorYears.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
+            </select>
+          </div>
         </Field>
       </div>
 
-      <p className="mt-3 text-xs text-ink-400">{location.note} {layer.note}</p>
+      <p className="mt-3 text-justify text-xs text-ink-400">
+        Tip: the clearest change is <strong>dry season vs monsoon</strong> ({beforeSeasonObj.note} on
+        the left, {afterSeasonObj.note} on the right). {location.note} {layer.note}
+      </p>
 
       {/* Comparator */}
       <div className="relative mt-4 h-[62vh] max-h-[620px] min-h-[420px] w-full overflow-hidden rounded-2xl border border-ink-100">
@@ -191,12 +229,12 @@ export default function SatelliteComparator() {
           style={{ clipPath: `inset(0 0 0 ${split}%)` }}
         />
 
-        {/* Year labels */}
+        {/* Date labels */}
         <span className="pointer-events-none absolute left-3 top-3 z-10 rounded-full bg-ink-950/75 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
-          {beforeYear}
+          {beforeSeasonObj.name.replace(/ \(.*\)/, "")} {beforeYear}
         </span>
         <span className="pointer-events-none absolute right-3 top-3 z-10 rounded-full bg-ink-950/75 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
-          {afterYear}
+          {afterSeasonObj.name.replace(/ \(.*\)/, "")} {afterYear}
         </span>
 
         {/* Divider + slider */}

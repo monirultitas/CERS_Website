@@ -57,28 +57,47 @@ export type ComparatorLayer = {
   note: string;
 };
 
+// VIIRS (rather than MODIS) has a wide ~3000km swath, so single-day imagery
+// over Bangladesh is gap-free — no black no-data wedges between orbits.
 export const comparatorLayers: ComparatorLayer[] = [
   {
     id: "truecolor",
     name: "True colour",
-    gibsLayer: "MODIS_Terra_CorrectedReflectance_TrueColor",
+    gibsLayer: "VIIRS_SNPP_CorrectedReflectance_TrueColor",
     note: "Natural colour, as the eye would see from orbit.",
   },
   {
-    id: "bands721",
-    name: "Water & vegetation (7-2-1)",
-    gibsLayer: "MODIS_Terra_CorrectedReflectance_Bands721",
+    id: "falsecolor",
+    name: "Water & vegetation",
+    gibsLayer: "VIIRS_SNPP_CorrectedReflectance_BandsM11-I2-I1",
     note: "False colour: water is dark blue, vegetation bright green, bare ground tan — flood extent stands out sharply.",
   },
 ];
 
-// MODIS Terra has good coverage from ~2012 onward for these layers.
-export const comparatorYears: number[] = [2012, 2014, 2016, 2018, 2020, 2022, 2024, 2025];
+// VIIRS SNPP has reliable daily coverage in GIBS from 2016 onward.
+export const comparatorYears: number[] = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
 
-// A clear-sky-ish dry-season default date within a given year, so both sides
-// are comparable seasons (mid-January = post-monsoon, usually low cloud).
-export function dateForYear(year: number): string {
-  return `${year}-01-15`;
+// Season is what actually drives visible change over Bangladesh at 250m: the
+// difference between dry-season low water and monsoon flooding is dramatic,
+// whereas two dry-season days years apart look almost identical. Each season
+// maps to a representative date.
+export type Season = {
+  id: string;
+  name: string;
+  monthDay: string;
+  note: string;
+};
+
+export const comparatorSeasons: Season[] = [
+  { id: "dry", name: "Dry season (Feb)", monthDay: "02-10", note: "low water, exposed sand & bare fields" },
+  { id: "premonsoon", name: "Pre-monsoon (Apr)", monthDay: "04-15", note: "rising rivers, early rains" },
+  { id: "monsoon", name: "Monsoon (Aug)", monthDay: "08-20", note: "peak flooding and swollen rivers" },
+  { id: "postmonsoon", name: "Post-monsoon (Nov)", monthDay: "11-10", note: "receding water, lush vegetation" },
+];
+
+export function dateFor(year: number, seasonId: string): string {
+  const season = comparatorSeasons.find((s) => s.id === seasonId) ?? comparatorSeasons[0];
+  return `${year}-${season.monthDay}`;
 }
 
 export function gibsTileUrl(gibsLayer: string, date: string): string {

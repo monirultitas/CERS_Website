@@ -9,7 +9,7 @@ const heroImage = areaImages["geoai-remote-sensing"];
 export const metadata: Metadata = {
   title: "Satellite Comparator",
   description:
-    "Drag to compare two years of NASA satellite imagery over Bangladesh — see monsoon flood extent, river migration, and seasonal change for yourself.",
+    "Drag to compare NASA satellite imagery of Bangladesh across seasons and years — watch dry-season land turn to monsoon floodwater for yourself.",
 };
 
 export default function SatelliteComparatorPage() {
@@ -18,7 +18,7 @@ export default function SatelliteComparatorPage() {
       <PageHero
         eyebrow="Before & After"
         title="See Bangladesh change from orbit."
-        description="Pick a place, pick two years, and drag the slider. The imagery is live from NASA, updated continuously."
+        description="Pick a place, pick two dates, and drag the slider. Dry season vs monsoon shows the most dramatic change. Imagery is live from NASA."
         image={heroImage.src}
         imageAlt={heroImage.alt}
         photoCredit={heroImage.credit}
@@ -28,10 +28,11 @@ export default function SatelliteComparatorPage() {
         <Container>
           <SatelliteComparator />
           <p className="mt-4 text-justify text-xs text-ink-400">
-            Imagery: NASA EOSDIS GIBS (MODIS Terra Corrected Reflectance, 250m resolution). Both
-            sides show mid-January of the chosen year, a low-cloud dry-season window that keeps the
-            two dates comparable. At 250m, this view is built for regional change such as monsoon
-            flood extent, river migration, and seasonal vegetation rather than street-level detail.
+            Imagery: NASA EOSDIS GIBS (MODIS Terra Corrected Reflectance, 250m resolution). Each
+            side shows a single day, so an occasional cloudy date may obscure the view — nudge the
+            year if so. At 250m this is built for regional change such as monsoon flood extent,
+            river migration, and seasonal vegetation rather than street-level detail. The starkest
+            contrast is dry season against monsoon, when huge areas of land turn to water.
           </p>
         </Container>
       </section>
