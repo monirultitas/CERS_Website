@@ -43,3 +43,9 @@ export const aboutImage: AreaImage = {
   alt: "Dhaka skyline at night",
   credit: "Photo: Md. Ishtiaque Mahmood Rohan / CC BY 3.0",
 };
+
+export const projectsImage: AreaImage = {
+  src: "/images/ganges-delta.jpg",
+  alt: "Copernicus Sentinel-3 satellite image of the Ganges–Brahmaputra delta and the Bay of Bengal",
+  credit: "Photo: ESA / CC BY-SA 3.0 IGO",
+};

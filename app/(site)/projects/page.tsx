@@ -6,7 +6,7 @@ import Container from "@/components/layout/Container";
 import ProjectImpactMap from "@/components/gis/ProjectImpactMap";
 import { projects } from "@/lib/projects-content";
 import { getResearchDetail } from "@/lib/research-content";
-import { areaImages } from "@/lib/media";
+import { areaImages, projectsImage } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -20,9 +20,9 @@ export default function ProjectsPage() {
         eyebrow="Projects"
         title="Research in the field, mapped from orbit."
         description="A working record of CERS's active and completed projects, each anchored to one of our four research pillars."
-        image={areaImages["water-sustainability"].src}
-        imageAlt={areaImages["water-sustainability"].alt}
-        photoCredit={areaImages["water-sustainability"].credit}
+        image={projectsImage.src}
+        imageAlt={projectsImage.alt}
+        photoCredit={projectsImage.credit}
       />
 
       <section className="bg-white pt-16">
