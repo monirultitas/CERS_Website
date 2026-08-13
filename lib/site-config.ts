@@ -40,6 +40,7 @@ export function isNavGroup(entry: NavEntry): entry is NavGroup {
 }
 
 export const navigation: NavEntry[] = [
+  { label: "Home", href: "/" },
   {
     label: "Research",
     items: [

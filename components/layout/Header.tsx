@@ -52,8 +52,9 @@ export default function Header() {
           <Logo />
         </Link>
 
-        {/* Desktop nav */}
-        <nav ref={navRef} className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+        {/* Right-aligned desktop nav + CTA */}
+        <div className="hidden items-center gap-3 lg:flex">
+        <nav ref={navRef} className="flex items-center gap-0.5" aria-label="Primary">
           {navigation.map((entry) => {
             const active = entryIsActive(entry, pathname);
             if (!isNavGroup(entry)) {
@@ -131,7 +132,6 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="hidden lg:block">
           <Link
             href="/contact"
             className="rounded-full bg-brand-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-800"
