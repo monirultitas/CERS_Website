@@ -38,7 +38,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-ink-900">
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-white text-ink-900"
+      >
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
